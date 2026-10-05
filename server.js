@@ -207,7 +207,7 @@ export function createApp(options = {}) {
         fail(404,'Not found.');
       }
       if(!['GET','HEAD'].includes(method))fail(405,'Method not allowed.');
-      const assets={'/app.js':['app.js','text/javascript; charset=utf-8'],'/styles.css':['styles.css','text/css; charset=utf-8'],'/favicon.svg':['favicon.svg','image/svg+xml']};
+      const assets={'/app.js':['app.js','text/javascript; charset=utf-8'],'/styles.css':['styles.css','text/css; charset=utf-8'],'/favicon.svg':['favicon.svg','image/svg+xml'],'/table-for-two.svg':['table-for-two.svg','image/svg+xml']};
       const asset=assets[path]||(['/','/auth/verify'].includes(path)?['index.html','text/html; charset=utf-8']:null);
       if(!asset)fail(404,'Page not found.');const content=readFileSync(join(root,'public',asset[0]));res.writeHead(200,{'Content-Type':asset[1],'Cache-Control':'no-cache'});res.end(method==='HEAD'?undefined:content);
     } catch(e) {if(res.headersSent)return res.end();if(!e.status)console.error('Request failed:',e.name);json(e.status||500,{error:e.status?e.message:'Something went wrong. Please try again.'});}
