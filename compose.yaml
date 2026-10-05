@@ -8,7 +8,7 @@ services:
       DATABASE_PATH: /data/some-company.sqlite
       PORT: 3000
     ports:
-      - "127.0.0.1:3000:3000"
+      - "127.0.0.1:${HOST_PORT:-3000}:3000"
     volumes:
       - some-company-data:/data
     read_only: true

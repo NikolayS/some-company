@@ -54,6 +54,9 @@ The server starts without email credentials to permit health checks and public b
 
 ### Container deployment
 
+For the requested SAMO hostname, see [the production handoff](DEPLOYMENT.md).
+Set `HOST_PORT` to an unused loopback port when deploying on a shared host.
+
 ```sh
 docker compose up -d --build
 curl --fail http://127.0.0.1:3000/healthz
