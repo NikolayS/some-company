@@ -2,6 +2,7 @@ FROM node:24-bookworm-slim
 ENV NODE_ENV=production PORT=3000 DATABASE_PATH=/data/some-company.sqlite
 WORKDIR /app
 COPY --chown=node:node package.json package-lock.json server.js ./
+RUN npm ci --omit=dev && npm cache clean --force
 COPY --chown=node:node public ./public
 RUN mkdir /data && chown node:node /data
 USER node

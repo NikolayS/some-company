@@ -15,5 +15,8 @@
   },
   "devDependencies": {
     "playwright-core": "^1.63.0"
+  },
+  "dependencies": {
+    "express": "5.2.1"
   }
 }

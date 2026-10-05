@@ -1,4 +1,5 @@
 import http from 'node:http';
+import express from 'express';
 import { DatabaseSync } from 'node:sqlite';
 import { randomBytes, createHash } from 'node:crypto';
 import { mkdirSync, readFileSync } from 'node:fs';
@@ -64,7 +65,9 @@ export function createApp(options = {}) {
     return p;
   }
   const cleanup = setInterval(()=>{run('DELETE FROM tokens WHERE expires<?',now());run('DELETE FROM sessions WHERE expires<?',now());run('DELETE FROM limits WHERE reset<?',now());},60000); cleanup.unref();
-  const server = http.createServer(async(req,res)=>{
+  const transport = express();
+  transport.disable('x-powered-by');
+  transport.use(async(req,res)=>{
     res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('Referrer-Policy','no-referrer');res.setHeader('X-Frame-Options','DENY');res.setHeader('Permissions-Policy','camera=(), microphone=(), geolocation=()');
     res.setHeader('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'");
     if(production) res.setHeader('Strict-Transport-Security','max-age=31536000');
@@ -209,6 +212,7 @@ export function createApp(options = {}) {
       if(!asset)fail(404,'Page not found.');const content=readFileSync(join(root,'public',asset[0]));res.writeHead(200,{'Content-Type':asset[1],'Cache-Control':'no-cache'});res.end(method==='HEAD'?undefined:content);
     } catch(e) {if(res.headersSent)return res.end();if(!e.status)console.error('Request failed:',e.name);json(e.status||500,{error:e.status?e.message:'Something went wrong. Please try again.'});}
   });
+  const server = http.createServer(transport);
   server.requestTimeout=15000;server.headersTimeout=10000;
   server.on('close',()=>{clearInterval(cleanup);db.close();});
   return {server,db};

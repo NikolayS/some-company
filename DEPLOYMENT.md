@@ -1,7 +1,31 @@
 # Some Company — production handoff
 
-Target: `https://some-company.samo.team`. Public repository:
-`https://github.com/samo-agent/some-company`.
+Original requested target: `https://some-company.samo.team`.
+Current SAMO project hostname: `https://some-project.samo.team`.
+Public repository: `https://github.com/NikolayS/some-company`.
+
+## SAMO dashboard deployment
+
+The app now uses Express as its HTTP entry layer so SAMO's Node-server detector
+recognizes it. It is not a static export: do not create a frontend-only `dist`
+directory. Use Node 24+, `npm run build`, and `npm start`. Let SAMO assign PORT.
+
+Configure these in the project's environment settings before deploying:
+
+- `APP_URL=https://some-project.samo.team` (change this if the hostname changes)
+- `DEV_EMAIL_CONSOLE=0`, `TRUST_PROXY=0`
+- `DATABASE_PATH=<operator-provisioned writable persistent path outside the site directory>`
+- `RESEND_API_KEY`, verified `EMAIL_FROM`, and responsible `ADMIN_EMAILS`
+
+SAMO's Node deploy replaces the site directory on every deploy. A relative
+`./data/` database inside it is **not durable across redeploys**. The persistent
+directory must exist/be writable by the application service account and have
+backups before accepting members. The homepage and health checks can run without
+Resend, but real sign-in remains unavailable until email is configured.
+
+The actual SAMO host's Node version, external data path permissions, and real
+email delivery still need verification. The Docker route below remains an
+alternative if the managed host cannot provide those requirements.
 
 The code is ready for a single-instance Docker deployment. The domain's current
 SAMO placeholder is **not** this application. No production deployment or real
@@ -22,7 +46,7 @@ Run on the selected host with Docker Compose installed and an account permitted
 to manage this application. Review the existing host layout first:
 
 ```sh
-git clone https://github.com/samo-agent/some-company.git
+git clone https://github.com/NikolayS/some-company.git
 cd some-company
 cp .env.example .env
 chmod 600 .env

@@ -10,7 +10,7 @@
 - Private join requests and conversations; owner accept/decline, guest withdraw. Couples use two places. Capacity enforced server-side; accepted guests lock plan dates/destination/type against unexpected changes.
 - Block/unblock, member reports, and an email-allowlisted admin report console with suspension/restoration. Suspended accounts lose sessions and public visibility.
 - Self-service account deletion with cascading deletion of member plans/requests/messages. Reports retain text with removed account references.
-- Same-origin JSON writes, restrictive CSP, bounded input, SQLite-backed rate limits, parameterized SQL, server-side authorization. No third-party frontend scripts, fonts, analytics, or runtime packages. Playwright Core is a development-only browser-test dependency.
+- Same-origin JSON writes, restrictive CSP, bounded input, SQLite-backed rate limits, parameterized SQL, server-side authorization. No third-party frontend scripts, fonts or analytics. Express is the HTTP entry layer, enabling SAMO's Node-server detection. Playwright Core is a development-only browser-test dependency.
 
 ## Local development
 
@@ -51,6 +51,21 @@ Copy `.env.example` to a private `.env` or use your host's secret manager:
 | `DEV_EMAIL_CONSOLE=0` | Keep disabled in production. |
 
 The server starts without email credentials to permit health checks and public browsing, but sign-in explicitly returns unavailable until both sending variables are configured. A Resend API key alone does not prove sender authorization. Real delivery must be checked with a consenting account after deploy. No email has to be sent by the test suite.
+
+### SAMO managed Node deployment
+
+This is an **Express / Node.js server**, not a static export. Build with
+`npm ci && npm run build`, then run `npm start` on **Node 24+**. SAMO assigns
+`PORT`; do not override it. No `dist` output directory is needed.
+
+For the current project, configure `APP_URL=https://some-project.samo.team`,
+`DEV_EMAIL_CONSOLE=0`, `TRUST_PROXY=0`, the Resend sending key, verified
+`EMAIL_FROM`, and responsible `ADMIN_EMAILS` in SAMO's environment settings.
+Set `DATABASE_PATH` to an operator-provisioned writable persistent directory
+**outside SAMO's deployed site directory**. SAMO replaces that site directory
+on redeploy, so `./data/` there would lose member data. Do not accept real
+members until persistence and backups have been verified. A homepage can run
+without email configuration, but sign-in will remain unavailable.
 
 ### Container deployment
 
