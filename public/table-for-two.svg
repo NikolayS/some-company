@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="420" viewBox="0 0 480 420">
+<g fill="none" stroke="#2444df" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M20 100c45-37 79 4 52 44S5 210 39 243c20 21 67 3 76 23" stroke-dasharray="3 10"/>
+<path d="M389 303c53-17 61-47 48-74s-27-41-13-68" stroke-dasharray="3 10"/>
+<g transform="rotate(-9 243 209)">
+<path d="M148 125c30-21 148-15 180 7 33 24 33 130-3 155-30 24-149 25-179-2-30-27-32-134 2-160Z" fill="#fcfaf3"/>
+<path d="M161 139c32-18 121-15 150 5 24 20 24 104-4 124-26 19-119 23-146-2-24-23-28-106 0-127Z"/>
+<ellipse cx="185" cy="177" rx="32" ry="29"/>
+<path d="M166 168c0-12 38-14 39 0v20c-3 17-36 17-39-1Z" fill="#f7df6e"/>
+<ellipse cx="185" cy="169" rx="19" ry="7" fill="#2444df"/>
+<path d="M206 170c20-7 19 24 0 19M174 139c-8-12 7-12 0-23m17 24c-8-13 7-14 0-27"/>
+<ellipse cx="284" cy="244" rx="32" ry="29"/>
+<path d="M265 235c0-12 38-14 39 0v20c-3 17-36 17-39-1Z" fill="#f7df6e"/>
+<ellipse cx="284" cy="236" rx="19" ry="7" fill="#2444df"/>
+<path d="M265 239c-20-8-21 22-1 18M275 210c-8-12 7-12 0-23m17 24c-8-13 7-14 0-27"/>
+<path d="M219 205l22-17 24 29-22 17Z" fill="#f7df6e"/>
+<path d="m226 207 15-11m-9 18 14-11m-9 18 14-11" stroke-width="2"/>
+</g>
+<g transform="rotate(-12 105 186)"><path d="M61 138c-5-33 59-39 67-11l10 108c3 17-61 24-66 7Z" fill="#f7df6e"/><path d="m65 148 61-9m-58 29 60-9m-58 29 60-9m-59 29 61-10M75 246l-2 35m63-48 8 33"/></g>
+<g transform="rotate(-12 370 239)"><path d="M339 192c-5-33 59-39 67-11l10 108c3 17-61 24-66 7Z" fill="#f7df6e"/><path d="m343 202 61-9m-58 29 60-9m-58 29 60-9m-59 29 61-10M353 300l-2 35m63-48 8 33"/></g>
+<path d="m323 71 11-20m-2 31 25-6m-38 3-8-16M123 310l-8 16m18-10 2 19"/>
+</g>
+<g fill="#2444df" font-family="monospace" font-size="12" letter-spacing="2"><text x="40" y="58">NO GRAND ITINERARY.</text><text x="219" y="385">JUST A GOOD HELLO.</text></g>
+</svg>
